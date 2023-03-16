@@ -74,8 +74,11 @@ print("  System load:  %-5.2f                Processes:           %d" % (loadav,
 print("  Memory usage: %-4s                 Users logged in:     %d" % (memperc, users))
 print("  Swap usage:   %s" % (swapperc))
 
+hidden_fs = ["/boot"]
+fs = list(filter(lambda x: all(y not in x for y in hidden_fs), statfs))
+
 print("  Disk Usage:")
-for k in sorted(statfs.keys()):
+for k in sorted(fs):
   print("    Usage of %-24s: %-20s" % (k, statfs[k]))
 
 # Don't show statistics of Inodes
