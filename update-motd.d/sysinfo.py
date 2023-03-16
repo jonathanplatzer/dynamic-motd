@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # landscape-sysinfo-mini.py -- a trivial re-implementation of the 
 # sysinfo printout shown on debian at boot time. No twisted, no reactor, just /proc & utmp
@@ -6,7 +6,7 @@
 # (C) 2014 jw@owncloud.com
 #
 # inspired by ubuntu 14.10 /etc/update-motd.d/50-landscape-sysinfo
-# Requires: python-utmp 
+# Requires: python3-utmp 
 # for counting users.
 #
 # 2014-09-07 V1.0 jw, ad hoc writeup, feature-complete. Probably buggy?
