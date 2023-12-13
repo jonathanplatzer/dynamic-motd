@@ -16,7 +16,7 @@
 # Modified by Luc Didry in 2016
 # Get the original version at https://github.com/jnweiger/landscape-sysinfo-mini
 
-import sys,os,time,posix,glob,utmp
+import sys,os,time,posix,glob,utmp,fnmatch
 from UTMPCONST import *
 
 _version_ = '1.2'
@@ -74,8 +74,8 @@ print("  System load:  %-5.2f                Processes:           %d" % (loadav,
 print("  Memory usage: %-4s                 Users logged in:     %d" % (memperc, users))
 print("  Swap usage:   %s" % (swapperc))
 
-hidden_fs = ["/boot"]
-fs = list(filter(lambda x: all(y not in x for y in hidden_fs), statfs))
+hidden_fs = [line.partition('#')[0].rstrip() for line in open('/etc/update-motd.d/hidden')]
+fs = list(filter(lambda path: all(not fnmatch.fnmatch(path, hide) for hide in hidden_fs), statfs))
 
 print("  Disk Usage:")
 for k in sorted(fs):
